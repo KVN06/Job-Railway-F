@@ -1,80 +1,39 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Job Railway – Frontend independiente
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Proyecto reducido a una sola capa de presentación. Se han eliminado todos los artefactos de Laravel (PHP, rutas, modelos, migraciones y pruebas) para que puedas trabajar únicamente el frontend y consumir APIs externas.
 
-## About Laravel
+## 🚀 Stack actual
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- [Vite 6](https://vitejs.dev/) para el bundling.
+- [Tailwind CSS 4](https://tailwindcss.com/) mediante el plugin oficial para Vite.
+- Estructura de estilos y vistas bajo `resources/`.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Project notes
-
-- Las ofertas laborales ahora requieren que la empresa esté autenticada y sea propietaria de la oferta para crear, editar o eliminar registros.
-- Se validan los campos críticos mediante *Form Requests*, garantizando ubicaciones opcionales, salarios numéricos y categorías existentes.
-- Las categorías de ofertas se sincronizan de forma segura durante la creación y actualización.
-
-### Ejecutar pruebas
+## 🛠️ Scripts disponibles
 
 ```bash
-php artisan test
+npm install      # Instala dependencias
+npm run dev      # Entorno de desarrollo con recarga en caliente
+npm run build    # Compila a producción en dist/
+npm run preview  # Sirve la build resultante para revisión local
 ```
 
-Las pruebas cubren los casos de acceso invitado, usuarios desempleados y empresas para la creación de ofertas laborales.
+## 📂 Estructura relevante
 
-## Learning Laravel
+- `index.html`: punto de entrada del SPA/MPA generado por Vite.
+- `resources/css`: estilos base y utilidades de Tailwind.
+- `resources/js`: punto de entrada (`app.js`) y futuros módulos/componentes.
+- `public/`: activos estáticos que se copian tal cual en la build.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## ✅ Siguientes pasos sugeridos
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1. Migrar las vistas Blade a componentes o plantillas compatibles con tu framework JS preferido.
+2. Conectar con el backend que elijas vía `fetch`, `axios` u otra librería HTTP.
+3. Añadir un enrutador (React Router, Vue Router, etc.) si necesitas navegación multipágina.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🤝 Contribución
 
-## Laravel Sponsors
+Se aceptan PRs orientados a mejoras del frontend, limpieza de estilos o integración con APIs. Para grandes cambios, abre primero un issue y conversemos.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 📄 Licencia
 
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Código distribuido bajo la licencia MIT incluida en este repositorio.
