@@ -4,7 +4,11 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "export:html": "node scripts/export-blade-to-html.js",
+        "export:html:clean": "node scripts/export-blade-to-html.js --clean",
+        "views:remove": "node scripts/remove-views.js --confirm",
+        "views:remove:force": "node scripts/remove-views.js --confirm --force"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",
