@@ -1,36 +1,29 @@
-@props([
-    'variant' => 'default',
-    'size' => 'md',
-    'icon' => null
-])
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Component · Badge</title>
+		<link rel="stylesheet" href="/resources/css/app.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	</head>
+	<body class="bg-gray-50 text-gray-900">
+		<main class="container mx-auto px-4 py-8">
+			<h1 class="text-2xl font-bold mb-4">Badge variants & sizes</h1>
+			<div id="variants" class="space-x-2 space-y-2"></div>
+			<div id="sizes" class="space-x-2 space-y-2 mt-6"></div>
+		</main>
+		<script type="module" src="/resources/js/app.js"></script>
+		<script>
+			document.addEventListener('DOMContentLoaded', () => {
+				const vRoot = document.getElementById('variants');
+				const variants = ['default','primary','success','warning','danger','pending','under_review','accepted','rejected'];
+				for (const v of variants) vRoot.appendChild(window.UI.createBadge({ variant:v, text:v }));
 
-@php
-    $variantClasses = [
-        'default' => 'bg-gray-100 text-gray-800',
-        'primary' => 'bg-blue-100 text-blue-800',
-        'success' => 'bg-green-100 text-green-800',
-        'warning' => 'bg-yellow-100 text-yellow-800',
-        'danger' => 'bg-red-100 text-red-800',
-        'pending' => 'badge-pending',
-        'under_review' => 'badge-under-review',
-        'accepted' => 'badge-accepted',
-        'rejected' => 'badge-rejected',
-    ];
-
-    $sizeClasses = [
-        'sm' => 'px-2 py-1 text-xs',
-        'md' => 'px-3 py-1 text-sm',
-        'lg' => 'px-4 py-2 text-base',
-    ];
-
-    $baseClasses = 'inline-flex items-center font-semibold rounded-full ' .
-                   ($variantClasses[$variant] ?? $variantClasses['default']) . ' ' .
-                   ($sizeClasses[$size] ?? $sizeClasses['md']);
-@endphp
-
-<span {{ $attributes->merge(['class' => $baseClasses]) }}>
-    @if($icon)
-        <i class="{{ $icon }} mr-1.5"></i>
-    @endif
-    {{ $slot }}
-</span>
+				const sRoot = document.getElementById('sizes');
+				const sizes = ['sm','md','lg'];
+				for (const s of sizes) sRoot.appendChild(window.UI.createBadge({ size:s, text:`size: ${s}`, variant:'primary', icon:'fas fa-tag' }));
+			});
+		</script>
+	</body>
+	</html>

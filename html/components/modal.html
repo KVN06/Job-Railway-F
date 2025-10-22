@@ -1,76 +1,37 @@
-@props([
-    'name' => 'modal',
-    'title' => '',
-    'size' => 'md',
-    'showClose' => true
-])
-
-@php
-    $sizeClasses = [
-        'sm' => 'max-w-md',
-        'md' => 'max-w-2xl',
-        'lg' => 'max-w-4xl',
-        'xl' => 'max-w-6xl',
-        'full' => 'max-w-full mx-4',
-    ];
-
-    $modalSize = $sizeClasses[$size] ?? $sizeClasses['md'];
-@endphp
-
-<div
-    x-data="{ show: false }"
-    x-show="show"
-    x-on:open-modal-{{ $name }}.window="show = true"
-    x-on:close-modal-{{ $name }}.window="show = false"
-    x-on:keydown.escape.window="show = false"
-    class="fixed inset-0 z-50 overflow-y-auto"
-    style="display: none;"
->
-    <!-- Backdrop -->
-    <div
-        x-show="show"
-        x-transition:enter="transition ease-out duration-300"
-        x-transition:enter-start="opacity-0"
-        x-transition:enter-end="opacity-100"
-        x-transition:leave="transition ease-in duration-200"
-        x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0"
-        class="fixed inset-0 bg-black bg-opacity-50"
-        @click="show = false"
-    ></div>
-
-    <!-- Modal -->
-    <div class="flex items-center justify-center min-h-screen p-4">
-        <div
-            x-show="show"
-            x-transition:enter="transition ease-out duration-300"
-            x-transition:enter-start="opacity-0 transform scale-90"
-            x-transition:enter-end="opacity-100 transform scale-100"
-            x-transition:leave="transition ease-in duration-200"
-            x-transition:leave-start="opacity-100 transform scale-100"
-            x-transition:leave-end="opacity-0 transform scale-90"
-            class="bg-white rounded-2xl shadow-2xl w-full {{ $modalSize }} relative"
-            @click.stop
-        >
-            <!-- Header -->
-            @if($title || $showClose)
-                <div class="flex items-center justify-between p-6 border-b border-gray-200">
-                    <h3 class="text-xl font-bold text-gray-900">{{ $title }}</h3>
-                    @if($showClose)
-                        <button
-                            @click="show = false"
-                            class="text-gray-400 hover:text-gray-600 transition-colors"
-                        >
-                            <i class="fas fa-times text-xl"></i>
-                        </button>
-                    @endif
-                </div>
-            @endif
-
-            <!-- Content -->
-            <div class="p-6">
-                {{ $slot }}
-            </div>
-        </div>
-    </div>
-</div>
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Component · Modal</title>
+		<link rel="stylesheet" href="/resources/css/app.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	</head>
+	<body class="bg-gray-50 text-gray-900">
+		<main class="container mx-auto px-4 py-8">
+			<h1 class="text-2xl font-bold mb-4">Modal demo</h1>
+			<div class="space-x-3">
+				<button id="openSm" class="px-4 py-2 bg-blue-600 text-white rounded">Abrir pequeño</button>
+				<button id="openMd" class="px-4 py-2 bg-indigo-600 text-white rounded">Abrir mediano</button>
+				<button id="openLg" class="px-4 py-2 bg-purple-600 text-white rounded">Abrir grande</button>
+			</div>
+		</main>
+		<script type="module" src="/resources/js/app.js"></script>
+		<script>
+			document.addEventListener('DOMContentLoaded', () => {
+				const sm = window.UI.createModal({ title:'Modal pequeño', size:'sm' });
+				const md = window.UI.createModal({ title:'Modal mediano', size:'md' });
+				const lg = window.UI.createModal({ title:'Modal grande', size:'lg' });
+				document.body.appendChild(sm.host);
+				document.body.appendChild(md.host);
+				document.body.appendChild(lg.host);
+				sm.setContent('Contenido del modal pequeño');
+				md.setContent('Contenido del modal mediano');
+				lg.setContent('Contenido del modal grande');
+				document.getElementById('openSm').addEventListener('click', ()=> sm.show());
+				document.getElementById('openMd').addEventListener('click', ()=> md.show());
+				document.getElementById('openLg').addEventListener('click', ()=> lg.show());
+			});
+		</script>
+	</body>
+	</html>

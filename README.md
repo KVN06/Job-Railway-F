@@ -1,4 +1,45 @@
-# Job Railway – Frontend independiente
+# Job Opportunity - Frontend estático
+
+Este proyecto genera páginas HTML estáticas y un pequeño bundle JS para montar listados/detalles de ofertas cuando se requieran.
+
+## API
+
+- Base por defecto: `https://job-railway-production.up.railway.app/api`
+- Puedes sobreescribirla con Vite: crea `.env` (o `.env.local`) y define:
+
+```bash
+VITE_API_BASE_URL=https://job-railway-production.up.railway.app/api
+VITE_API_AUTH_MODE=bearer   # o 'cookie' si tu backend usa sesión/cookies
+```
+
+## Scripts útiles
+
+- `npm run dev`: servidor de desarrollo con Vite.
+- `npm run build`: compila el bundle.
+- `npm run export:html:clean`: exporta y limpia HTML.
+- `npm run html:inject-app`: inyecta `<script type="module" src="/resources/js/app.js">` solo en archivos HTML que contengan contenedores con `data-page` (ver abajo).
+
+## Auto-montaje
+
+El bundle solo se inyecta en páginas con contenedores:
+
+- Lista de ofertas: `<div data-page="job-offers"></div>`
+- Detalle de oferta: `<div data-page="job-offer-detail"></div>`
+
+Esto evita cargar JS en páginas estáticas puras.
+
+## Notas de autenticación
+
+El cliente HTTP (`resources/js/api/http.js`) soporta dos modos:
+
+- `bearer` (por defecto): usa `Authorization: Bearer <token>` si llamas a `configureAuth({ token })`.
+- `cookie`: si la API usa sesión/cookies (CORS debe permitir `credentials`), llama `configureAuth({ mode: 'cookie' })`.
+
+También puedes fijar el modo por entorno con `VITE_API_AUTH_MODE=bearer|cookie`.
+
+Cuando la API responde 401, se lanza un error con `code = 'AUTH_REQUIRED'`. El bundle registra un aviso en consola; no redirige.
+
+## Job Railway – Frontend independiente
 
 Proyecto reducido a una sola capa de presentación. Se han eliminado todos los artefactos de Laravel (PHP, rutas, modelos, migraciones y pruebas) para que puedas trabajar únicamente el frontend y consumir APIs externas.
 

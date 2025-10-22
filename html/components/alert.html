@@ -1,43 +1,29 @@
-@props([
-    'type' => 'info',
-    'dismissible' => true,
-    'icon' => null
-])
-
-@php
-    $typeConfig = [
-        'success' => [
-            'class' => 'alert-success',
-            'icon' => 'fas fa-check-circle'
-        ],
-        'error' => [
-            'class' => 'alert-error',
-            'icon' => 'fas fa-exclamation-circle'
-        ],
-        'warning' => [
-            'class' => 'alert-warning',
-            'icon' => 'fas fa-exclamation-triangle'
-        ],
-        'info' => [
-            'class' => 'alert-info',
-            'icon' => 'fas fa-info-circle'
-        ],
-    ];
-
-    $config = $typeConfig[$type] ?? $typeConfig['info'];
-    $displayIcon = $icon ?? $config['icon'];
-@endphp
-
-<div {{ $attributes->merge(['class' => $config['class'] . ' mb-6 animate-fade-in-up']) }} x-data="{ show: true }" x-show="show" x-transition>
-    <div class="flex items-start">
-        <i class="{{ $displayIcon }} text-xl mr-3 mt-0.5"></i>
-        <div class="flex-1">
-            {{ $slot }}
-        </div>
-        @if($dismissible)
-            <button @click="show = false" class="ml-4 text-current opacity-70 hover:opacity-100 transition-opacity">
-                <i class="fas fa-times"></i>
-            </button>
-        @endif
-    </div>
-</div>
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Component · Alert</title>
+		<link rel="stylesheet" href="/resources/css/app.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	</head>
+	<body class="bg-gray-50 text-gray-900">
+		<main class="container mx-auto px-4 py-8">
+			<h1 class="text-2xl font-bold mb-4">Alert variants</h1>
+			<div id="demo" class="space-y-4"></div>
+		</main>
+		<script type="module" src="/resources/js/app.js"></script>
+		<script>
+			document.addEventListener('DOMContentLoaded', () => {
+				const root = document.getElementById('demo');
+				const variants = [
+					{ type:'success', content: 'Operación completada con éxito.' },
+					{ type:'error', content: 'Ha ocurrido un error inesperado.' },
+					{ type:'warning', content: 'Atención: valida los datos antes de continuar.' },
+					{ type:'info', content: 'Este es un mensaje informativo.' },
+				];
+				for (const v of variants) root.appendChild(window.UI.createAlert(v));
+			});
+		</script>
+	</body>
+	</html>

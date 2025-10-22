@@ -1,44 +1,28 @@
-@props([
-    'label' => null,
-    'name' => '',
-    'type' => 'text',
-    'error' => null,
-    'icon' => null,
-    'hint' => null,
-    'required' => false
-])
-
-<div {{ $attributes->only('class') }}>
-    @if($label)
-        <label for="{{ $name }}" class="block text-sm font-semibold text-gray-700 mb-2">
-            @if($icon)
-                <i class="{{ $icon }} text-blue-600 mr-1"></i>
-            @endif
-            {{ $label }}
-            @if($required)
-                <span class="text-red-500">*</span>
-            @endif
-        </label>
-    @endif
-
-    <input
-        type="{{ $type }}"
-        name="{{ $name }}"
-        id="{{ $name }}"
-        {{ $required ? 'required' : '' }}
-        {{ $attributes->except(['class', 'label', 'error', 'icon', 'hint'])->merge([
-            'class' => 'form-input-enhanced w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300' . ($error ? ' border-red-500' : '')
-        ]) }}
-    >
-
-    @if($hint)
-        <p class="text-sm text-gray-500 mt-1">{{ $hint }}</p>
-    @endif
-
-    @if($error)
-        <p class="text-sm text-red-600 mt-1">
-            <i class="fas fa-exclamation-circle mr-1"></i>
-            {{ $error }}
-        </p>
-    @endif
-</div>
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Component · Input</title>
+		<link rel="stylesheet" href="/resources/css/app.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	</head>
+	<body class="bg-gray-50 text-gray-900">
+		<main class="container mx-auto px-4 py-8">
+			<h1 class="text-2xl font-bold mb-4">Input states</h1>
+			<div id="inputs" class="space-y-4"></div>
+		</main>
+		<script type="module" src="/resources/js/app.js"></script>
+		<script>
+			document.addEventListener('DOMContentLoaded', () => {
+				const root = document.getElementById('inputs');
+				const a = window.UI.createInput({ label:'Nombre', name:'name', icon:'fas fa-user', hint:'Tu nombre completo', required:true, value:'' });
+				const b = window.UI.createInput({ label:'Email', name:'email', type:'email', icon:'fas fa-envelope', value:'', error:'El email no es válido' });
+				const c = window.UI.createInput({ label:'Contraseña', name:'password', type:'password' });
+				root.appendChild(a.host);
+				root.appendChild(b.host);
+				root.appendChild(c.host);
+			});
+		</script>
+	</body>
+	</html>

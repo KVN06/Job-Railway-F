@@ -8,7 +8,12 @@
         "export:html": "node scripts/export-blade-to-html.js",
         "export:html:clean": "node scripts/export-blade-to-html.js --clean",
         "views:remove": "node scripts/remove-views.js --confirm",
-        "views:remove:force": "node scripts/remove-views.js --confirm --force"
+        "views:remove:force": "node scripts/remove-views.js --confirm --force",
+        "html:rewire": "node scripts/rewire-html-links.js",
+        "html:sanitize": "node scripts/sanitize-html-from-blade.js",
+        "html:fix": "npm run html:sanitize && npm run html:rewire",
+        "html:inject-app": "node scripts/inject-app-script.js",
+        "html:recodify": "node scripts/recodify-html.js"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",

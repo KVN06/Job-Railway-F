@@ -1,45 +1,61 @@
-@extends('layouts.home') 
-<!-- Extiende la plantilla base 'home' -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Agregar Portafolio</title>
+	<link rel="stylesheet" href="/resources/css/app.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+	<style>
+		.field-error{display:block}
+	</style>
+	</head>
+<body class="bg-gray-50 text-gray-900">
+	<div data-include="/html/includes/headers/header-profile.html"></div>
 
-@section('content')
-    <!-- Sección de contenido principal de la página -->
+	<main class="container mx-auto py-8 px-6" data-page="portfolio-create">
+		<h1 class="text-3xl font-bold text-center mb-8">Agregar Portafolio</h1>
 
-    <form action="{{ route('agg-portfolio') }}" method="POST" enctype="multipart/form-data">
-        @csrf 
-        <!-- Token CSRF para seguridad en el envío del formulario -->
+		<section class="bg-white shadow rounded-lg p-6 max-w-lg mx-auto">
+			<div class="mb-4 text-sm text-red-700 bg-red-50 border border-red-200 rounded p-3 hidden" data-error></div>
+			<form action="#" method="POST" enctype="multipart/form-data" class="space-y-4">
+				<div>
+					<label for="title" class="block text-gray-700 font-medium">Título del Portafolio</label>
+					<input type="text" id="title" name="title" class="w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" required />
+				</div>
 
-        <main class="container mx-auto py-8 px-6">
-            <h1 class="text-3xl font-bold text-center mb-8">Agregar Portafolio</h1>
+				<div>
+					<label for="description" class="block text-gray-700 font-medium">Descripción</label>
+					<textarea id="description" name="description" class="w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" required></textarea>
+				</div>
 
-            <section class="bg-white shadow rounded-lg p-6 max-w-lg mx-auto">
-                <!-- Contenedor del formulario con estilos -->
+				<div>
+					<label for="url_proyect" class="block text-gray-700 font-medium">URL del Proyecto</label>
+					<input type="url" id="url_proyect" name="url_proyect" class="w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" required />
+				</div>
 
-                <div class="space-y-4">
-                    <div>
-                        <label for="title" class="block text-gray-700 font-medium">Título del Portafolio</label>
-                        <input type="text" id="title" name="title" class="w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
-                    </div>
+				<div>
+					<label for="url_pdf" class="block text-gray-700 font-medium">Archivo PDF (opcional)</label>
+					<input type="file" id="url_pdf" name="url_pdf" accept="application/pdf" class="w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+				</div>
 
-                    <div>
-                        <label for="description" class="block text-gray-700 font-medium">Descripción</label>
-                        <textarea id="description" name="description" class="w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" required></textarea>
-                    </div>
+				<button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition-colors duration-300">Agregar Portafolio</button>
+			</form>
+		</section>
+	</main>
 
-                    <div>
-                        <label for="url_proyect" class="block text-gray-700 font-medium">URL del Proyecto</label>
-                        <input type="url" id="url_proyect" name="url_proyect" class="w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
-                    </div>
+	<div data-include="/html/includes/footer.html"></div>
 
-                    <div>
-                        <label for="url_pdf" class="block text-gray-700 font-medium">Archivo PDF (opcional)</label>
-                        <input type="file" id="url_pdf" name="url_pdf" accept="application/pdf" class="w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-
-                    <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-400 transition-colors duration-300">
-                        Agregar Portafolio
-                    </button>
-                </div>
-            </section>
-        </main>
-    </form>
-@endsection
+	<script>
+		(async function(){
+			const slots = document.querySelectorAll('[data-include]');
+			for (const slot of slots) {
+				const url = slot.getAttribute('data-include');
+				try { const res = await fetch(url, { credentials: 'same-origin' }); if (res.ok) slot.outerHTML = await res.text(); } catch {}
+			}
+			document.dispatchEvent(new CustomEvent('includes:ready'));
+		})();
+	</script>
+	<script type="module" src="/resources/js/app.js"></script>
+</body>
+</html>
